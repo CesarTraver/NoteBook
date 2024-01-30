@@ -5,9 +5,12 @@
 package com.mycompany.notebook;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import javax.swing.JFileChooser;
@@ -56,13 +59,29 @@ public class NoteBook extends javax.swing.JFrame {
             jTextArea1.setText(text);
             setTitle(file.getName() + " ~ NoteBad");
         }finally {
-        if (input != null) {
-            input.close();
+            if (input != null) {
+                input.close();
+            }
         }
-    }
     }
     
     private void newFile() {
+
+    }
+    
+    private void saveFile() throws IOException{
+        JFileChooser chooser = new JFileChooser();
+        BufferedWriter output = null;
+        int returnVal = chooser.showOpenDialog(this);
+        if (returnVal == JFileChooser.APPROVE_OPTION) {
+            File file = chooser.getSelectedFile();
+        }
+        try {
+        /*    output = new BufferedWriter(new FileWriter());*/
+            output.write(jTextArea1.getText());
+        } catch (IOException e) {
+            System.err.println("Error");
+        }
         
     }
 
@@ -131,6 +150,11 @@ public class NoteBook extends javax.swing.JFrame {
         jButton3.setFocusable(false);
         jButton3.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButton3.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
         jToolBar1.add(jButton3);
 
         jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/frog.gif"))); // NOI18N
@@ -156,10 +180,12 @@ public class NoteBook extends javax.swing.JFrame {
 
         jMenu3.setText(bundle.getString("NoteBook.jMenu3.text")); // NOI18N
 
+        jMenuItem3.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_N, java.awt.event.InputEvent.SHIFT_DOWN_MASK | java.awt.event.InputEvent.CTRL_DOWN_MASK));
         jMenuItem3.setText(bundle.getString("NoteBook.jMenuItem3.text")); // NOI18N
         jMenu3.add(jMenuItem3);
         jMenu3.add(jSeparator1);
 
+        jMenuItem1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_O, java.awt.event.InputEvent.CTRL_DOWN_MASK));
         jMenuItem1.setText(bundle.getString("NoteBook.jMenuItem1.text")); // NOI18N
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -169,10 +195,12 @@ public class NoteBook extends javax.swing.JFrame {
         jMenu3.add(jMenuItem1);
         jMenu3.add(jSeparator2);
 
+        jMenuItem2.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.CTRL_DOWN_MASK));
         jMenuItem2.setText(bundle.getString("NoteBook.jMenuItem2.text")); // NOI18N
         jMenu3.add(jMenuItem2);
         jMenu3.add(jSeparator3);
 
+        jMenuItem4.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F4, java.awt.event.InputEvent.ALT_DOWN_MASK));
         jMenuItem4.setText(bundle.getString("NoteBook.jMenuItem4.text")); // NOI18N
         jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -275,6 +303,11 @@ public class NoteBook extends javax.swing.JFrame {
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField1ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        //saveFile();
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
      * @param args the command line arguments
