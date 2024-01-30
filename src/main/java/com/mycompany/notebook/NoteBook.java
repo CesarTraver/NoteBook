@@ -108,7 +108,8 @@ public class NoteBook extends javax.swing.JFrame {
         jToolBar1.setRollover(true);
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/folder.png"))); // NOI18N
-        jButton1.setText("Open");
+        java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("properties/Bundle_es_ES"); // NOI18N
+        jButton1.setText(bundle.getString("NoteBook.jButton1.text")); // NOI18N
         jButton1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButton1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -119,14 +120,14 @@ public class NoteBook extends javax.swing.JFrame {
         jToolBar1.add(jButton1);
 
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/add-file_7308716.png"))); // NOI18N
-        jButton2.setText("New");
+        jButton2.setText(bundle.getString("NoteBook.jButton2.text")); // NOI18N
         jButton2.setFocusable(false);
         jButton2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButton2.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         jToolBar1.add(jButton2);
 
         jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/save-file-option_icon-icons.com_73423.png"))); // NOI18N
-        jButton3.setText("Save");
+        jButton3.setText(bundle.getString("NoteBook.jButton3.text")); // NOI18N
         jButton3.setFocusable(false);
         jButton3.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButton3.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -143,7 +144,7 @@ public class NoteBook extends javax.swing.JFrame {
         });
         jToolBar1.add(jButton4);
 
-        jTextField1.setText("CroacCroacCroacCroacCroacCroacCroac");
+        jTextField1.setText(bundle.getString("NoteBook.jTextField1.text")); // NOI18N
         jTextField1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField1ActionPerformed(evt);
@@ -153,13 +154,13 @@ public class NoteBook extends javax.swing.JFrame {
 
         getContentPane().add(jToolBar1, java.awt.BorderLayout.PAGE_START);
 
-        jMenu3.setText("File");
+        jMenu3.setText(bundle.getString("NoteBook.jMenu3.text")); // NOI18N
 
-        jMenuItem3.setText("New");
+        jMenuItem3.setText(bundle.getString("NoteBook.jMenuItem3.text")); // NOI18N
         jMenu3.add(jMenuItem3);
         jMenu3.add(jSeparator1);
 
-        jMenuItem1.setText("Open");
+        jMenuItem1.setText(bundle.getString("NoteBook.jMenuItem1.text")); // NOI18N
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem1ActionPerformed(evt);
@@ -168,11 +169,11 @@ public class NoteBook extends javax.swing.JFrame {
         jMenu3.add(jMenuItem1);
         jMenu3.add(jSeparator2);
 
-        jMenuItem2.setText("Save");
+        jMenuItem2.setText(bundle.getString("NoteBook.jMenuItem2.text")); // NOI18N
         jMenu3.add(jMenuItem2);
         jMenu3.add(jSeparator3);
 
-        jMenuItem4.setText("Close");
+        jMenuItem4.setText(bundle.getString("NoteBook.jMenuItem4.text")); // NOI18N
         jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem4ActionPerformed(evt);
@@ -182,9 +183,9 @@ public class NoteBook extends javax.swing.JFrame {
 
         jMenuBar2.add(jMenu3);
 
-        jMenu4.setText("Edit");
+        jMenu4.setText(bundle.getString("NoteBook.jMenu4.text")); // NOI18N
 
-        jMenuItem5.setText("Show/Hide file bar");
+        jMenuItem5.setText(bundle.getString("NoteBook.jMenuItem5.text")); // NOI18N
         jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem5ActionPerformed(evt);
@@ -193,7 +194,7 @@ public class NoteBook extends javax.swing.JFrame {
         jMenu4.add(jMenuItem5);
         jMenu4.add(jSeparator4);
 
-        jMenuItem6.setText("Don't release me");
+        jMenuItem6.setText(bundle.getString("NoteBook.jMenuItem6.text")); // NOI18N
         jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem6ActionPerformed(evt);
@@ -327,7 +328,7 @@ public class NoteBook extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JPopupMenu.Separator jSeparator2;
-    private javax.swing.JSeparator jSeparator3;
+    private javax.swing.JPopupMenu.Separator jSeparator3;
     private javax.swing.JPopupMenu.Separator jSeparator4;
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextField jTextField1;
