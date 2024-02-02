@@ -4,18 +4,12 @@
  */
 package com.mycompany.notebook;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
+import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import javax.swing.JFileChooser;
+import javax.swing.*;
 
-/**
+/**l
  *
  * @author alu10720810
  */
@@ -23,18 +17,22 @@ public class NoteBook extends javax.swing.JFrame {
 
     /**
      * Creates new form NoteBook
-     */
+     */ 
+    
+    private File file;
+    
     public NoteBook() {
         initComponents();
         jButton4.setVisible(false);
         jTextField1.setVisible(false);
+        setTitle("" + "~ NoteBad");
     }
     
     private void load() {
         JFileChooser chooser = new JFileChooser();
         int returnVal = chooser.showOpenDialog(this);
         if (returnVal == JFileChooser.APPROVE_OPTION) {
-            File file = chooser.getSelectedFile();
+            file = chooser.getSelectedFile();
             try {
                 openFile(file);
             } catch (IOException e) {
@@ -65,24 +63,45 @@ public class NoteBook extends javax.swing.JFrame {
         }
     }
     
-    private void newFile() {
-
-    }
     
-    private void saveFile() throws IOException{
+    private void saveFileAs() {
         JFileChooser chooser = new JFileChooser();
-        BufferedWriter output = null;
+        PrintWriter output = null;
         int returnVal = chooser.showOpenDialog(this);
         if (returnVal == JFileChooser.APPROVE_OPTION) {
-            File file = chooser.getSelectedFile();
+            file = chooser.getSelectedFile();
+            try {
+                output = new PrintWriter(new FileWriter(file));
+                output.print(jTextArea1.getText());
+            } catch (IOException e) {
+                System.err.println("Error");
+            } finally {
+                if (output != null) {
+                    output.close();
+                }
+            }
         }
+    }
+    
+    private void saveFile() {
+        PrintWriter out = null;
+        file = file.getAbsoluteFile();
         try {
-        /*    output = new BufferedWriter(new FileWriter());*/
-            output.write(jTextArea1.getText());
-        } catch (IOException e) {
+            out = new PrintWriter(new FileWriter(file));
+            out.print(jTextArea1.getText());
+        } catch (IOException ex) {
             System.err.println("Error");
+        } finally {
+            if (out != null) {
+                out.close();
+            }
         }
-        
+    }
+    
+    private void newFile() {
+        jTextArea1.setText("");
+        file = null;
+        setTitle("" + "~ NoteBad");
     }
 
     /**
@@ -109,6 +128,8 @@ public class NoteBook extends javax.swing.JFrame {
         jMenuItem1 = new javax.swing.JMenuItem();
         jSeparator2 = new javax.swing.JPopupMenu.Separator();
         jMenuItem2 = new javax.swing.JMenuItem();
+        jSeparator5 = new javax.swing.JPopupMenu.Separator();
+        jMenuItem7 = new javax.swing.JMenuItem();
         jSeparator3 = new javax.swing.JPopupMenu.Separator();
         jMenuItem4 = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
@@ -143,6 +164,11 @@ public class NoteBook extends javax.swing.JFrame {
         jButton2.setFocusable(false);
         jButton2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButton2.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
         jToolBar1.add(jButton2);
 
         jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/save-file-option_icon-icons.com_73423.png"))); // NOI18N
@@ -182,6 +208,11 @@ public class NoteBook extends javax.swing.JFrame {
 
         jMenuItem3.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_N, java.awt.event.InputEvent.SHIFT_DOWN_MASK | java.awt.event.InputEvent.CTRL_DOWN_MASK));
         jMenuItem3.setText(bundle.getString("NoteBook.jMenuItem3.text")); // NOI18N
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
         jMenu3.add(jMenuItem3);
         jMenu3.add(jSeparator1);
 
@@ -197,7 +228,22 @@ public class NoteBook extends javax.swing.JFrame {
 
         jMenuItem2.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.CTRL_DOWN_MASK));
         jMenuItem2.setText(bundle.getString("NoteBook.jMenuItem2.text")); // NOI18N
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
         jMenu3.add(jMenuItem2);
+        jMenu3.add(jSeparator5);
+
+        jMenuItem7.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.SHIFT_DOWN_MASK | java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        jMenuItem7.setText(bundle.getString("NoteBook.jMenuItem7.text")); // NOI18N
+        jMenuItem7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem7ActionPerformed(evt);
+            }
+        });
+        jMenu3.add(jMenuItem7);
         jMenu3.add(jSeparator3);
 
         jMenuItem4.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F4, java.awt.event.InputEvent.ALT_DOWN_MASK));
@@ -306,8 +352,28 @@ public class NoteBook extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-        //saveFile();
+        saveFile();
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
+        // TODO add your handling code here:
+        saveFileAs();
+    }//GEN-LAST:event_jMenuItem7ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        newFile();
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+        // TODO add your handling code here:
+        newFile();
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
+
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        // TODO add your handling code here:
+        saveFile();
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -358,11 +424,13 @@ public class NoteBook extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem6;
+    private javax.swing.JMenuItem jMenuItem7;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JPopupMenu.Separator jSeparator2;
     private javax.swing.JPopupMenu.Separator jSeparator3;
     private javax.swing.JPopupMenu.Separator jSeparator4;
+    private javax.swing.JPopupMenu.Separator jSeparator5;
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JToolBar jToolBar1;
